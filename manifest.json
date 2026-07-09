@@ -1,0 +1,20 @@
+{
+  "name": "수도 퀴즈 앱",
+  "short_name": "수도퀴즈",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "mouse.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "mouse.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
