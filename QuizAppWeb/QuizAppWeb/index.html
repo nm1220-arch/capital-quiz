@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>수도 퀴즈 애플리케이션</title>
+  
+  <!-- PWA & iOS Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="수도퀴즈">
+  <link rel="apple-touch-icon" href="mouse.png">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-content">
+      <h1 class="logo">🌍 수도 마스터</h1>
+      <form class="search-bar" id="searchForm">
+        <input type="text" id="searchInput" placeholder="나라/수도 검색..." autocomplete="off">
+        <button type="submit" id="btnSearch" class="btn-search">검색</button>
+        <div id="searchResult" class="search-result hidden"></div>
+      </form>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="app-main">
+    
+    <!-- Screen 1: Main Map Screen -->
+    <section id="screenMain" class="screen active">
+      <div class="map-header">
+        <h2>지도 기반 퀴즈 선택</h2>
+        <div style="display: flex; gap: 1rem;">
+          <button class="btn-review" id="navReviewBtn">📝 오답노트</button>
+          <button class="btn-review" id="navDictionaryBtn">📖 수도 사전</button>
+          <button class="btn-danger" style="margin: 0;" id="resetProgressBtn">🔄 전체 초기화</button>
+        </div>
+      </div>
+      <!-- Schematic World Map Background -->
+      <div class="map-container" style="background-image: url('world_map.png'); background-size: cover; background-position: center; border-radius: 20px;">
+        
+        <button class="continent-btn europe" data-continent="europe">
+          <span class="continent-name" id="badge-europe">유럽</span>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px; margin-bottom: 2px;">
+            <span style="font-size: 0.6rem; color: #a78bfa;">Easy</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill easy-fill" id="progress-easy-europe"></div></div>
+            <span class="progress-text" id="progress-text-easy-europe">0%</span>
+          </div>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px;">
+            <span style="font-size: 0.6rem; color: #f87171;">Hard</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill hard-fill" id="progress-hard-europe"></div></div>
+            <span class="progress-text" id="progress-text-hard-europe">0%</span>
+          </div>
+        </button>
+
+        <button class="continent-btn asia" data-continent="asia">
+          <span class="continent-name" id="badge-asia">아시아</span>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px; margin-bottom: 2px;">
+            <span style="font-size: 0.6rem; color: #a78bfa;">Easy</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill easy-fill" id="progress-easy-asia"></div></div>
+            <span class="progress-text" id="progress-text-easy-asia">0%</span>
+          </div>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px;">
+            <span style="font-size: 0.6rem; color: #f87171;">Hard</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill hard-fill" id="progress-hard-asia"></div></div>
+            <span class="progress-text" id="progress-text-hard-asia">0%</span>
+          </div>
+        </button>
+
+        <button class="continent-btn africa" data-continent="africa">
+          <span class="continent-name" id="badge-africa">아프리카</span>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px; margin-bottom: 2px;">
+            <span style="font-size: 0.6rem; color: #a78bfa;">Easy</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill easy-fill" id="progress-easy-africa"></div></div>
+            <span class="progress-text" id="progress-text-easy-africa">0%</span>
+          </div>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px;">
+            <span style="font-size: 0.6rem; color: #f87171;">Hard</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill hard-fill" id="progress-hard-africa"></div></div>
+            <span class="progress-text" id="progress-text-hard-africa">0%</span>
+          </div>
+        </button>
+
+        <button class="continent-btn north-america" data-continent="north-america">
+          <span class="continent-name" id="badge-north-america">북아메리카</span>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px; margin-bottom: 2px;">
+            <span style="font-size: 0.6rem; color: #a78bfa;">Easy</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill easy-fill" id="progress-easy-north-america"></div></div>
+            <span class="progress-text" id="progress-text-easy-north-america">0%</span>
+          </div>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px;">
+            <span style="font-size: 0.6rem; color: #f87171;">Hard</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill hard-fill" id="progress-hard-north-america"></div></div>
+            <span class="progress-text" id="progress-text-hard-north-america">0%</span>
+          </div>
+        </button>
+
+        <button class="continent-btn south-america" data-continent="south-america">
+          <span class="continent-name" id="badge-south-america">남아메리카</span>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px; margin-bottom: 2px;">
+            <span style="font-size: 0.6rem; color: #a78bfa;">Easy</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill easy-fill" id="progress-easy-south-america"></div></div>
+            <span class="progress-text" id="progress-text-easy-south-america">0%</span>
+          </div>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px;">
+            <span style="font-size: 0.6rem; color: #f87171;">Hard</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill hard-fill" id="progress-hard-south-america"></div></div>
+            <span class="progress-text" id="progress-text-hard-south-america">0%</span>
+          </div>
+        </button>
+
+        <button class="continent-btn oceania" data-continent="oceania">
+          <span class="continent-name" id="badge-oceania">오세아니아</span>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px; margin-bottom: 2px;">
+            <span style="font-size: 0.6rem; color: #a78bfa;">Easy</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill easy-fill" id="progress-easy-oceania"></div></div>
+            <span class="progress-text" id="progress-text-easy-oceania">0%</span>
+          </div>
+          <div style="width: 100%; display:flex; align-items:center; gap: 4px;">
+            <span style="font-size: 0.6rem; color: #f87171;">Hard</span>
+            <div class="progress-bar-bg" style="margin:0; flex:1;"><div class="progress-bar-fill hard-fill" id="progress-hard-oceania"></div></div>
+            <span class="progress-text" id="progress-text-hard-oceania">0%</span>
+          </div>
+        </button>
+        
+        <div class="developer-profile">
+          <span>개발자:</span>
+          <img src="developer.jpg" alt="개발자 사진" class="developer-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 2: Quiz Screen -->
+    <section id="screenQuiz" class="screen hidden">
+      <img src="mouse.png" class="deco-mouse mouse-quiz-1" alt="mouse">
+      <img src="mouse.png" class="deco-mouse mouse-quiz-2" alt="mouse">
+      <button class="btn-back" id="backToMainFromQuiz">← 메인으로</button>
+      <div class="quiz-container">
+        <h2 id="quizContinentName">대륙 이름</h2>
+        <div class="quiz-card">
+          <p class="question-label">다음 나라의 수도는 어디일까요?</p>
+          <h1 id="quizCountryName">나라 이름</h1>
+          <form id="quizForm">
+            <input type="text" id="quizInput" placeholder="수도를 입력하세요" autocomplete="off" required>
+            <button type="submit" class="btn-submit">정답 확인</button>
+          </form>
+          <div id="quizMultipleChoice" class="hidden" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
+            <!-- Buttons injected by JS -->
+          </div>
+          <div id="quizFeedback" class="feedback hidden"></div>
+        </div>
+        <div class="quiz-progress">
+          진행률: <span id="quizProgressText">0 / 0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 3: Review Screen (오답노트) -->
+    <section id="screenReview" class="screen hidden">
+      <button class="btn-back" id="backToMainFromReview">← 메인으로</button>
+      <div class="review-container">
+        <h2>📝 오답노트</h2>
+        <div id="emptyReview" class="empty-state">아직 틀린 문제가 없습니다! 완벽해요 🎉</div>
+        <div id="reviewList" class="review-list">
+          <!-- 리뷰 아이템 삽입 -->
+        </div>
+        <button id="clearReviewBtn" class="btn-danger hidden" style="margin-top: 1rem; width: 100%;">오답노트 비우기</button>
+      </div>
+    </section>
+
+    <!-- Screen 4: Dictionary (수도 사전) -->
+    <section id="screenDictionary" class="screen hidden">
+      <button class="btn-back" id="backToMainFromDict">← 메인으로</button>
+      <div class="dict-container">
+        <h2>📖 수도 사전</h2>
+        <div id="dictionaryList" class="dict-list">
+          <!-- 사전 아이템 삽입 -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Question Config Modal -->
+  <div id="questionModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h2 id="modalContinentName">대륙 이름 퀴즈 설정</h2>
+      <p id="modalMaxCount" style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">최대 개수</p>
+      
+      <div class="modal-input-group" style="margin-bottom: 0.5rem;">
+        <label>모드 선택:</label>
+        <div style="display: flex; gap: 1rem; align-items: center; justify-content: center;">
+          <label style="cursor:pointer;"><input type="radio" name="quizMode" value="easy" checked> 이지 (객관식)</label>
+          <label style="cursor:pointer;"><input type="radio" name="quizMode" value="hard"> 하드 (단답형)</label>
+        </div>
+      </div>
+      <div class="modal-input-group">
+        <label for="modalInputCount">문제 수:</label>
+        <input type="number" id="modalInputCount" min="1" value="5">
+      </div>
+      
+      <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+        <button id="modalCancelBtn" class="btn-review" style="flex: 1;">취소</button>
+        <button id="modalStartBtn" class="btn-submit" style="flex: 1;">퀴즈 시작</button>
+      </div>
+      <button id="modalRetryIncorrectBtn" class="btn-review" style="width: 100%; margin-top: 0.5rem; display: none;">틀린/남은 문제만 풀기 (<span id="modalIncorrectCount">0</span>개)</button>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          console.log('SW Registered!', reg);
+        }).catch(err => console.error('SW failed', err));
+      });
+    }
+  </script>
+</body>
+</html>
