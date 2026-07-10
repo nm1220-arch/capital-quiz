@@ -23,6 +23,18 @@ const quizForm = document.getElementById('quizForm');
 const quizInput = document.getElementById('quizInput');
 const quizFeedback = document.getElementById('quizFeedback');
 const quizProgressText = document.getElementById('quizProgressText');
+const btnNextQuestion = document.getElementById('btnNextQuestion');
+
+if (btnNextQuestion) {
+  btnNextQuestion.addEventListener('click', () => {
+    if (currentQuestionIndex >= currentQuizQueue.length) {
+      showScreen(screenMain);
+    } else {
+      currentQuestionIndex++;
+      loadNextQuestion();
+    }
+  });
+}
 
 // Modal Elements
 const questionModal = document.getElementById('questionModal');
@@ -229,8 +241,8 @@ function executeSearch(query) {
   // Remove spaces to make search more robust
   const cleanQuery = query.replace(/\s+/g, '');
   const results = quizData.filter(d => 
-    d.country.replace(/\s+/g, '').includes(cleanQuery) || 
-    d.capital.replace(/\s+/g, '').includes(cleanQuery)
+    d.country.toLowerCase().replace(/\s+/g, '').includes(cleanQuery) || 
+    d.capital.toLowerCase().replace(/\s+/g, '').includes(cleanQuery)
   );
 
   if (results.length > 0) {
@@ -340,6 +352,11 @@ function startQuiz(numQuestions, dataToUse) {
   currentQuizQueue = shuffled.slice(0, numQuestions);
   currentQuestionIndex = 0;
   
+  if (btnNextQuestion) {
+    btnNextQuestion.innerText = "다음 문제";
+    btnNextQuestion.classList.add('hidden');
+  }
+  
   quizContinentName.innerText = `${currentContinentStr} 퀴즈`;
   showScreen(screenQuiz);
   loadNextQuestion();
@@ -355,17 +372,25 @@ function loadNextQuestion() {
     quizFeedback.innerText = "모든 문제를 풀었습니다.";
     quizFeedback.className = 'feedback correct';
     quizFeedback.classList.remove('hidden');
+    if (btnNextQuestion) {
+      btnNextQuestion.innerText = "메인메뉴로";
+      btnNextQuestion.classList.remove('hidden');
+    }
     return;
   }
   
   const q = currentQuizQueue[currentQuestionIndex];
   quizCountryName.innerText = q.country;
   quizFeedback.classList.add('hidden');
+  if (btnNextQuestion) btnNextQuestion.classList.add('hidden');
   quizProgressText.innerText = `${currentQuestionIndex + 1} / ${currentQuizQueue.length}`;
   
   if (currentQuizMode === 'hard') {
     if(mcContainer) mcContainer.classList.add('hidden');
     quizForm.style.display = 'flex';
+    const submitBtn = quizForm.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = false;
+    quizInput.disabled = false;
     quizInput.value = '';
     quizInput.focus();
   } else {
@@ -404,6 +429,10 @@ function handleEasyAnswer(selectedOpt, currentQ) {
   quizFeedback.classList.remove('hidden');
   quizFeedback.className = 'feedback';
   
+  // Disable all MC buttons to prevent multiple clicks
+  const mcButtons = document.querySelectorAll('#quizMultipleChoice button');
+  mcButtons.forEach(btn => btn.disabled = true);
+
   // exact match for multiple choice
   if (selectedOpt === currentQ.capital) {
     quizFeedback.innerText = "정답입니다! 🎉";
@@ -415,10 +444,7 @@ function handleEasyAnswer(selectedOpt, currentQ) {
       updateProgressUI();
     }
     
-    setTimeout(() => {
-      currentQuestionIndex++;
-      loadNextQuestion();
-    }, 1000);
+    if (btnNextQuestion) btnNextQuestion.classList.remove('hidden');
   } else {
     quizFeedback.innerHTML = `틀렸습니다 😢<br>정답은 <strong>${currentQ.capital}</strong> 입니다.`;
     quizFeedback.classList.add('incorrect');
@@ -429,6 +455,8 @@ function handleEasyAnswer(selectedOpt, currentQ) {
       incorrectNotes.push(currentQ);
       localStorage.setItem('capitalQuizReview', JSON.stringify(incorrectNotes));
     }
+    
+    if (btnNextQuestion) btnNextQuestion.classList.remove('hidden');
   }
 }
 
@@ -442,6 +470,10 @@ quizForm.addEventListener('submit', (e) => {
   quizFeedback.classList.remove('hidden');
   quizFeedback.className = 'feedback'; // reset
   
+  const submitBtn = quizForm.querySelector('button[type="submit"]');
+  if (submitBtn) submitBtn.disabled = true;
+  quizInput.disabled = true;
+
   if (result.isCorrect) {
     if (result.type === 'fuzzy') {
       quizFeedback.innerHTML = `정답입니다! 🎉<br><small>(입력: ${userAnswer} -> 인정됨. 정확한 수도는 <strong>${currentQ.capital}</strong>입니다)</small>`;
@@ -458,12 +490,7 @@ quizForm.addEventListener('submit', (e) => {
       updateProgressUI();
     }
     
-    // 다음 문제로 지연 이동
-    setTimeout(() => {
-      currentQuestionIndex++;
-      loadNextQuestion();
-    }, 1500);
-    
+    if (btnNextQuestion) btnNextQuestion.classList.remove('hidden');
   } else {
     quizFeedback.innerHTML = `틀렸습니다 😢<br>정답은 <strong>${currentQ.capital}</strong> 입니다.`;
     quizFeedback.classList.add('incorrect');
@@ -471,11 +498,7 @@ quizForm.addEventListener('submit', (e) => {
     // 오답노트에 추가
     addToReview(currentQ);
     
-    // 다음 문제로 지연 이동
-    setTimeout(() => {
-      currentQuestionIndex++;
-      loadNextQuestion();
-    }, 2000);
+    if (btnNextQuestion) btnNextQuestion.classList.remove('hidden');
   }
 });
 
@@ -544,6 +567,7 @@ function renderDictionaryList() {
     const data = quizData.filter(d => d.continent === key);
     if(data.length > 0) {
       html += `<div class="continent-header">${name} (${data.length}개국)</div>`;
+      html += `<div class="continent-grid">`;
       data.forEach(item => {
         html += `
           <div class="dict-item">
@@ -552,6 +576,7 @@ function renderDictionaryList() {
           </div>
         `;
       });
+      html += `</div>`;
     }
   }
   

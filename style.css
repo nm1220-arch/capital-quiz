@@ -357,33 +357,38 @@ main {
 
 .review-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 
 .review-item {
   background: var(--surface);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  padding: 1.5rem;
+  border-radius: 12px;
+  padding: 1rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
-.review-info h3 { font-size: 1.25rem; margin-bottom: 0.25rem; }
-.review-info p { color: var(--text-muted); font-size: 0.9rem; }
-.review-info span.correct-ans { color: var(--success); font-weight: 600; }
+.review-info { margin-bottom: 1rem; }
+.review-info h3 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+.review-info p { color: var(--text-muted); font-size: 0.85rem; }
+.review-info span.correct-ans { color: var(--success); font-weight: 600; display: block; margin-top: 0.2rem; }
 
 .btn-remove-review {
   background: rgba(239, 68, 68, 0.1);
   color: var(--danger);
   border: 1px solid rgba(239, 68, 68, 0.2);
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 8px;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s;
+  width: 100%;
 }
 
 .btn-remove-review:hover {
@@ -426,12 +431,17 @@ main {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 
+    0 8px 20px rgba(59, 130, 246, 0.4), 
+    inset 0 6px 10px rgba(255, 255, 255, 0.6), 
+    inset 0 -6px 10px rgba(0, 0, 0, 0.2);
+  border: 5px double var(--primary);
+  background-color: white;
   animation: float 4s ease-in-out infinite;
   z-index: 10;
   pointer-events: none;
-  object-fit: cover;
-  border: 2px solid var(--primary);
 }
 
 @keyframes float {
@@ -528,25 +538,39 @@ main {
   margin-bottom: 2rem;
 }
 .dictionary-list {
+  display: block;
+}
+.continent-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 .dict-item {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 1rem;
+  border-radius: 8px;
+  padding: 0.8rem 0.4rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
 }
 .dict-item strong {
   display: block;
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
   color: var(--primary);
+  word-break: break-all;
+  line-height: 1.2;
 }
 .dict-item span {
+  display: block;
   color: var(--text-main);
+  font-size: 0.8rem;
+  word-break: break-all;
+  line-height: 1.2;
 }
 .continent-header {
   grid-column: 1 / -1;
@@ -594,4 +618,32 @@ main {
 .developer-img:active {
   transform: scale(4);
   z-index: 100;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .deco-mouse {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .mouse-main-1 { top: 5%; left: 5%; }
+  .mouse-main-2 { bottom: 5%; right: 5%; }
+  .mouse-quiz-1 { top: 2%; right: 2%; opacity: 0.5; }
+  .mouse-quiz-2 { bottom: 2%; left: 2%; opacity: 0.5; display: none; } /* 하나는 숨겨서 입력창 방해 최소화 */
+  
+  .map-container {
+    display: flex !important;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: none;
+    background-image: none !important;
+  }
+  
+  .continent-btn {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+  }
 }

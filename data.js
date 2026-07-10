@@ -1,7 +1,7 @@
 const quizData = [
   // 아시아 (Asia)
   { country: "대한민국", capital: "서울", continent: "asia" },
-  { country: "조선민주주의인민공화국", capital: "평양", continent: "asia" },
+  { country: "조선민주주의인민공화국", capital: "평양", continent: "asia", aliases: ["북한"] },
   { country: "일본", capital: "도쿄", continent: "asia" },
   { country: "중국", capital: "베이징", continent: "asia" },
   { country: "대만", capital: "타이베이", continent: "asia" },
@@ -30,10 +30,10 @@ const quizData = [
   { country: "사우디아라비아", capital: "리야드", continent: "asia" },
   { country: "예멘", capital: "사나", continent: "asia" },
   { country: "오만", capital: "무스카트", continent: "asia" },
-  { country: "아랍에미리트", capital: "아부다비", continent: "asia" },
+  { country: "아랍에미리트", capital: "아부다비", continent: "asia", aliases: ["UAE", "아랍 에미리트"] },
   { country: "카타르", capital: "도하", continent: "asia" },
   { country: "바레인", capital: "마나마", continent: "asia" },
-  { country: "쿠웨이트", capital: "쿠웨이트시티", continent: "asia" },
+  { country: "쿠웨이트", capital: "쿠웨이트시티", continent: "asia", aliases: ["쿠웨이트 시티", "쿠웨이트"] },
   { country: "시리아", capital: "다마스쿠스", continent: "asia" },
   { country: "레바논", capital: "베이루트", continent: "asia" },
   { country: "요르단", capital: "암만", continent: "asia" },
@@ -49,7 +49,7 @@ const quizData = [
   { country: "키르기스스탄", capital: "비슈케크", continent: "asia" },
 
   // 유럽 (Europe)
-  { country: "영국", capital: "런던", continent: "europe" },
+  { country: "영국", capital: "런던", continent: "europe", aliases: ["잉글랜드", "UK"] },
   { country: "프랑스", capital: "파리", continent: "europe" },
   { country: "독일", capital: "베를린", continent: "europe" },
   { country: "이탈리아", capital: "로마", continent: "europe" },
@@ -60,7 +60,7 @@ const quizData = [
   { country: "벨기에", capital: "브뤼셀", continent: "europe" },
   { country: "룩셈부르크", capital: "룩셈부르크", continent: "europe" },
   { country: "스위스", capital: "베른", continent: "europe" },
-  { country: "오스트리아", capital: "빈", continent: "europe" },
+  { country: "오스트리아", capital: "빈", continent: "europe", aliases: ["비엔나"] },
   { country: "폴란드", capital: "바르샤바", continent: "europe" },
   { country: "체코", capital: "프라하", continent: "europe" },
   { country: "슬로바키아", capital: "브라티슬라바", continent: "europe" },
@@ -96,9 +96,9 @@ const quizData = [
   { country: "튀르키예", capital: "앙카라", continent: "europe" },
 
   // 북아메리카 (North America)
-  { country: "미국", capital: "워싱턴 D.C.", continent: "north-america" },
+  { country: "미국", capital: "워싱턴 D.C.", continent: "north-america", aliases: ["워싱턴 디씨", "워싱턴디씨"] },
   { country: "캐나다", capital: "오타와", continent: "north-america" },
-  { country: "멕시코", capital: "멕시코시티", continent: "north-america" },
+  { country: "멕시코", capital: "멕시코시티", continent: "north-america", aliases: ["멕시코 시티"] },
   { country: "과테말라", capital: "과테말라시티", continent: "north-america" },
   { country: "벨리즈", capital: "벨모판", continent: "north-america" },
   { country: "엘살바도르", capital: "산살바도르", continent: "north-america" },

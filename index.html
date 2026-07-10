@@ -32,6 +32,8 @@
     
     <!-- Screen 1: Main Map Screen -->
     <section id="screenMain" class="screen active">
+      <div class="deco-mouse mouse-main-1" style="background-image: url('spain.svg');"></div>
+      <div class="deco-mouse mouse-main-2" style="background-image: url('argentina.svg');"></div>
       <div class="map-header">
         <h2>지도 기반 퀴즈 선택</h2>
         <div style="display: flex; gap: 1rem;">
@@ -129,15 +131,15 @@
         
         <div class="developer-profile">
           <span>개발자:</span>
-          <img src="developer.jpg" alt="개발자 사진" class="developer-img">
+          <img src="developer_lsb.png" alt="개발자 사진" class="developer-img">
         </div>
       </div>
     </section>
 
     <!-- Screen 2: Quiz Screen -->
     <section id="screenQuiz" class="screen hidden">
-      <img src="mouse.png" class="deco-mouse mouse-quiz-1" alt="mouse">
-      <img src="mouse.png" class="deco-mouse mouse-quiz-2" alt="mouse">
+      <div class="deco-mouse mouse-quiz-1" style="background-image: url('argentina.svg');"></div>
+      <div class="deco-mouse mouse-quiz-2" style="background-image: url('spain.svg');"></div>
       <button class="btn-back" id="backToMainFromQuiz">← 메인으로</button>
       <div class="quiz-container">
         <h2 id="quizContinentName">대륙 이름</h2>
@@ -145,13 +147,14 @@
           <p class="question-label">다음 나라의 수도는 어디일까요?</p>
           <h1 id="quizCountryName">나라 이름</h1>
           <form id="quizForm">
-            <input type="text" id="quizInput" placeholder="수도를 입력하세요" autocomplete="off" required>
+            <input type="text" id="quizInput" placeholder="수도를 입력하세요" autocomplete="off" enterkeyhint="done" required>
             <button type="submit" class="btn-submit">정답 확인</button>
           </form>
           <div id="quizMultipleChoice" class="hidden" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
             <!-- Buttons injected by JS -->
           </div>
           <div id="quizFeedback" class="feedback hidden"></div>
+          <button id="btnNextQuestion" class="btn-submit hidden" style="width: 100%; margin-top: 1rem;">다음 문제</button>
         </div>
         <div class="quiz-progress">
           진행률: <span id="quizProgressText">0 / 0</span>
