@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 500">
+  <rect width="750" height="500" fill="#c60b1e"/>
+  <rect y="125" width="750" height="250" fill="#ffc400"/>
+  
+  <g transform="translate(150, 160) scale(1)">
+    <!-- Basic Coat of Arms layout for Spain -->
+    <path d="M0,0 h140 v90 c0,40 -70,90 -70,90 c0,0 -70,-50 -70,-90 z" fill="#fff" stroke="#c60b1e" stroke-width="4"/>
+    
+    <!-- Castile (Red with yellow castle) -->
+    <path d="M0,0 h70 v90 h-70 z" fill="#c60b1e"/>
+    <path d="M25,60 v-20 h5 v-10 h4 v10 h5 v-10 h4 v10 h5 v20 z" fill="#ffc400"/>
+    
+    <!-- Leon (White with red/purple lion) -->
+    <path d="M70,0 h70 v90 h-70 z" fill="#fff"/>
+    <path d="M100,50 c-5,-10 -5,-30 10,-30 c10,0 20,20 10,40 z" fill="#a00"/>
+    
+    <!-- Aragon (Yellow with 4 red stripes) -->
+    <path d="M0,90 h70 v90 c-10,-5 -20,-10 -35,-20 c-15,10 -25,15 -35,20 z" fill="#ffc400" />
+    <rect x="10" y="90" width="8" height="75" fill="#c60b1e" />
+    <rect x="25" y="90" width="8" height="65" fill="#c60b1e" />
+    <rect x="40" y="90" width="8" height="60" fill="#c60b1e" />
+    <rect x="55" y="90" width="8" height="50" fill="#c60b1e" />
+
+    <!-- Navarre (Red with yellow chains) -->
+    <path d="M70,90 h70 v90 c-10,-5 -20,-10 -35,-20 c-15,10 -25,15 -35,20 z" fill="#c60b1e"/>
+    <path d="M75,95 L135,165 M75,165 L135,95 M105,95 v70 M75,130 h60" stroke="#ffc400" stroke-width="4" />
+    <circle cx="105" cy="130" r="5" fill="#0c0" />
+    
+    <!-- Granada (Bottom flower) -->
+    <path d="M70,140 l20,40 l-20,10 l-20,-10 z" fill="#fff"/>
+    <circle cx="70" cy="165" r="8" fill="#d00" />
+    <circle cx="70" cy="165" r="4" fill="#ffc400" />
+    
+    <!-- Bourbon Inescutcheon -->
+    <ellipse cx="70" cy="90" rx="20" ry="25" fill="#00f" stroke="#c60b1e" stroke-width="4"/>
+    <circle cx="65" cy="85" r="3" fill="#ffc400"/>
+    <circle cx="75" cy="85" r="3" fill="#ffc400"/>
+    <circle cx="70" cy="95" r="3" fill="#ffc400"/>
+    
+    <!-- Crown -->
+    <path d="M30,-5 l10,-25 l10,15 l20,-15 l10,15 l10,-25 l10,5 l-5,25 h-60 z" fill="#ffc400" />
+    <circle cx="40" cy="-30" r="4" fill="#a00"/>
+    <circle cx="70" cy="-20" r="4" fill="#0a0"/>
+    <circle cx="100" cy="-30" r="4" fill="#a00"/>
+    
+    <!-- Pillars of Hercules -->
+    <rect x="-30" y="10" width="15" height="150" fill="#fff" stroke="#555" stroke-width="2"/>
+    <rect x="155" y="10" width="15" height="150" fill="#fff" stroke="#555" stroke-width="2"/>
+    <path d="M-40,0 h35 M-40,160 h35 M145,0 h35 M145,160 h35" stroke="#aaa" stroke-width="6"/>
+    <!-- Ribbons -->
+    <path d="M-35,30 c20,0 20,-20 30,0" fill="none" stroke="#c60b1e" stroke-width="6"/>
+    <path d="M-35,90 c20,0 20,-20 30,0" fill="none" stroke="#c60b1e" stroke-width="6"/>
+    <path d="M145,30 c20,0 20,-20 30,0" fill="none" stroke="#c60b1e" stroke-width="6"/>
+    <path d="M145,90 c20,0 20,-20 30,0" fill="none" stroke="#c60b1e" stroke-width="6"/>
+  </g>
+</svg>

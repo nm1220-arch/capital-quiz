@@ -302,7 +302,7 @@ main {
 }
 
 .btn-submit {
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   border-radius: 12px;
   background: var(--primary);
   color: white;
